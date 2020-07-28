@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/DR-Client-Review/static/css/main.5eb85f64.chunk.css",
+    "main.js": "/DR-Client-Review/static/js/main.eeb980ef.chunk.js",
+    "main.js.map": "/DR-Client-Review/static/js/main.eeb980ef.chunk.js.map",
+    "runtime-main.js": "/DR-Client-Review/static/js/runtime-main.267a9080.js",
+    "runtime-main.js.map": "/DR-Client-Review/static/js/runtime-main.267a9080.js.map",
+    "static/js/2.2694456e.chunk.js": "/DR-Client-Review/static/js/2.2694456e.chunk.js",
+    "static/js/2.2694456e.chunk.js.map": "/DR-Client-Review/static/js/2.2694456e.chunk.js.map",
+    "index.html": "/DR-Client-Review/index.html",
+    "precache-manifest.8d24a7b6ed717ad0ccc0fab09ebcc5d7.js": "/DR-Client-Review/precache-manifest.8d24a7b6ed717ad0ccc0fab09ebcc5d7.js",
+    "service-worker.js": "/DR-Client-Review/service-worker.js",
+    "static/css/main.5eb85f64.chunk.css.map": "/DR-Client-Review/static/css/main.5eb85f64.chunk.css.map",
+    "static/js/2.2694456e.chunk.js.LICENSE.txt": "/DR-Client-Review/static/js/2.2694456e.chunk.js.LICENSE.txt",
+    "static/media/feedback-form.styles.scss": "/DR-Client-Review/static/media/bg.d545049f.jpg",
+    "static/media/form-step4.styles.scss": "/DR-Client-Review/static/media/image-form4.9609d586.png",
+    "static/media/form-step5.styles.scss": "/DR-Client-Review/static/media/image-form5.debce40b.png",
+    "static/media/form-step3.styles.scss": "/DR-Client-Review/static/media/image-form3.4c89d078.png",
+    "static/media/success.styles.scss": "/DR-Client-Review/static/media/image-end.637fafd4.png",
+    "static/media/form-step1.styles.scss": "/DR-Client-Review/static/media/image-form1.8191249d.png",
+    "static/media/form-step2.styles.scss": "/DR-Client-Review/static/media/image-form2.bdad2a57.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.267a9080.js",
+    "static/js/2.2694456e.chunk.js",
+    "static/css/main.5eb85f64.chunk.css",
+    "static/js/main.eeb980ef.chunk.js"
+  ]
+}
