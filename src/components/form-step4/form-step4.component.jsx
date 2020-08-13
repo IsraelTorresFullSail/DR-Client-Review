@@ -28,7 +28,7 @@ export class FormStep4 extends Component {
                     <div className="logo"></div>
                     <div className="form-container">
                         <h1>Client Feedback</h1>
-                        <h2>Our relationship is very important to us.</h2>
+                        <h2>Your continued success is very important to us!</h2>
                         <div className='radio-buttons-wrapper'>
                             <label className="form-labels" htmlFor="recommend">
                                 <p className="span">Would you recommend DR to a friend?</p>

@@ -10,8 +10,8 @@
     ),
     url('../../assets/bg.jpg');
     background-size: 72.78vw auto;
-    background-repeat: no-repeat;
     background-position: 100% 50%;
+    background-attachment: fixed;
 
     @media (max-width: $laptop-breakpoint){
       background-size: 102.78vw auto;

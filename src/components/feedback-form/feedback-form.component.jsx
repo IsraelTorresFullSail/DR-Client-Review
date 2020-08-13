@@ -7,7 +7,7 @@ import FormStep2 from '../form-step2/form-step2.component';
 import FormStep3 from '../form-step3/form-step3.component';
 import FormStep4 from '../form-step4/form-step4.component';
 import FormStep5 from '../form-step5/form-step5.component';
-import FormErrors from '../form-errors/form-errors.component';
+// import FormErrors from '../form-errors/form-errors.component';
 
 export class FeedbackForm extends Component {
     constructor(props) {
@@ -33,6 +33,7 @@ export class FeedbackForm extends Component {
             testimonialValid: false,
             servicesValid: false,
             formValid: false,
+            copied: false,
         }
     }
 
@@ -167,6 +168,9 @@ export class FeedbackForm extends Component {
             services,
         } = this.state;
 
+        // Save testimonial to be copied in the next step
+        localStorage.setItem('testimonial', this.state.testimonial);
+
         const servicesArray = Object.keys(services);
         const servicesReturn = servicesArray.join(", ");
 
@@ -202,6 +206,7 @@ export class FeedbackForm extends Component {
                 testimonial,
                 services,
                 formErrors,
+                copied
               } = this.state;
         const values = {
                         firstName,
@@ -213,6 +218,7 @@ export class FeedbackForm extends Component {
                         testimonial,
                         services,
                         formErrors,
+                        copied
                     };
 
         return redirect? ( <Redirect to="/success" /> ) : (

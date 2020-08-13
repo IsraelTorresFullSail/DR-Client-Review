@@ -28,7 +28,7 @@ export class FormStep2 extends Component {
                     <div className="logo"></div>
                     <div className="form-container">
                         <h1>Client Feedback</h1>
-                        <h2>Our relationship is very important to us.</h2>
+                        <h2>Your continued success is very important to us!</h2>
                         <div className="box">
                             <p className="p">What services did you receive? (Click all that apply)</p>
                             <div className='checkbox-wrapper'>

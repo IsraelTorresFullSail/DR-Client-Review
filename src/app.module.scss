@@ -53,10 +53,11 @@ $small-mobile-breakpoint: 320px;
 }
 
 h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Istok Web', sans-serif;
     font-size: 3.02vw;
     text-transform: uppercase;
-    line-height: 150%;
+    line-height: 120%;
+    margin-bottom: 20px;
 
     @media (max-width: $laptop-breakpoint){
         font-size: 3.53vw;
@@ -73,6 +74,7 @@ h1 {
 }
 
 h2 {
+    font-family: 'Istok Web', sans-serif;
     font-size: 1.04vw;
     font-weight: 500;
     margin-bottom: 3vw;
@@ -93,6 +95,7 @@ h2 {
 }
 
 p {
+    font-family: 'Istok Web', sans-serif;
     margin-top: 5px;
 
     @media (max-width: $laptop-breakpoint){
