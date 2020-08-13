@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import CustomButton from '../custom-button/custom-button.component';
+import FormErrors from '../form-errors/form-errors.component';
 
 import './form-step5.styles.scss';
 
 export class FormStep5 extends Component {
+
     back = e => {
         e.preventDefault();
         this.props.prevStep();
@@ -20,7 +22,8 @@ export class FormStep5 extends Component {
     };
 
     render() {
-        const { values, handleChange } = this.props;
+        const { values, handleChange, valid, errors } = this.props;
+        
         return (
             <div className="layer5">
                 <div className="digital-name"></div>
@@ -29,6 +32,7 @@ export class FormStep5 extends Component {
                     <div className="form-container">
                         <h1>Client Feedback</h1>
                         <h2>Your continued success is very important to us!</h2>
+                        <FormErrors formErrors={errors} />
                         <div className="fields-wrapper">
                             <TextField 
                                 type="text"
@@ -46,7 +50,7 @@ export class FormStep5 extends Component {
                             />
                             <div className="buttons-container">
                                 <CustomButton onClick={this.back}>Back</CustomButton>
-                                <CustomButton type="submit" onClick={this.submit}>Submit</CustomButton>
+                                <CustomButton type="submit" onClick={this.submit} disabled={!valid}>Submit</CustomButton>
                             </div>
                             <div className="dots-wrapper">
                                 <div className="dot"></div>

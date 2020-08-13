@@ -7,7 +7,6 @@ import FormStep2 from '../form-step2/form-step2.component';
 import FormStep3 from '../form-step3/form-step3.component';
 import FormStep4 from '../form-step4/form-step4.component';
 import FormStep5 from '../form-step5/form-step5.component';
-// import FormErrors from '../form-errors/form-errors.component';
 
 export class FeedbackForm extends Component {
     constructor(props) {
@@ -28,10 +27,10 @@ export class FeedbackForm extends Component {
             lastNameValid: false,
             companyNameValid: false,
             relationshipFeedbackValid: false,
-            recommendValid: false,
+            // recommendValid: false,
             whyRecommendValid: false,
             testimonialValid: false,
-            servicesValid: false,
+            // servicesValid: false,
             formValid: false,
             copied: false,
         }
@@ -67,10 +66,10 @@ export class FeedbackForm extends Component {
         let lastNameValid = this.state.lastNameValid;
         let companyNameValid = this.state.companyNameValid;
         let relationshipFeedbackValid = this.state.relationshipFeedbackValid;
-        let recommendValid = this.state.recommendValid;
+        // let recommendValid = this.state.recommendValid;
         let whyRecommendValid = this.state.whyRecommendValid;
         let testimonialValid = this.state.testimonialValid;
-        let servicesValid = this.state.servicesValid;
+        // let servicesValid = this.state.servicesValid;
     
         switch (fieldName) {
           case 'firstName':
@@ -91,10 +90,10 @@ export class FeedbackForm extends Component {
             relationshipFeedbackValid = value.length >= 2;
             fieldValidationErrors.relationshipFeedback = relationshipFeedbackValid ? '' : ' is empty or too short';
             break;
-        case 'recommend':
-            recommendValid = value.length >= 2;
-            fieldValidationErrors.recommend = recommendValid ? '' : ' is empty or too short';
-            break;
+        // case 'recommend':
+        //     recommendValid = value.length >= 2;
+        //     fieldValidationErrors.recommend = recommendValid ? '' : ' is empty or too short';
+        //     break;
         case 'whyRecommend':
             whyRecommendValid = value.length >= 2;
             fieldValidationErrors.whyRecommend = whyRecommendValid ? '' : ' is empty or too short';
@@ -103,10 +102,10 @@ export class FeedbackForm extends Component {
             testimonialValid = value.length >= 2;
             fieldValidationErrors.testimonial = testimonialValid ? '' : ' is empty or too short';
             break;
-        case 'services':
-            servicesValid = value.length >= 1;
-            fieldValidationErrors.services = servicesValid ? '' : ' is empty';
-            break;
+        // case 'services':
+        //     servicesValid = value.length >= 1;
+        //     fieldValidationErrors.services = servicesValid ? '' : ' is empty';
+        //     break;
           default:
             break;
         }
@@ -117,10 +116,10 @@ export class FeedbackForm extends Component {
             lastNameValid: lastNameValid,
             companyNameValid: companyNameValid,
             relationshipFeedbackValid: relationshipFeedbackValid,
-            recommendValid: recommendValid,
+            //recommendValid: recommendValid,
             whyRecommendValid: whyRecommendValid,
             testimonialValid: testimonialValid,
-            servicesValid: servicesValid,
+            //servicesValid: servicesValid,
           },
           this.validateForm
         );
@@ -133,10 +132,10 @@ export class FeedbackForm extends Component {
             this.state.lastNameValid &&
             this.state.companyNameValid &&
             this.state.relationshipFeedbackValid &&
-            this.state.recommendValid &&
+            //this.state.recommendValid &&
             this.state.whyRecommendValid &&
-            this.state.testimonialValid &&
-            this.state.servicesValid,
+            this.state.testimonialValid 
+            //this.state.servicesValid,
         });
       }
     
@@ -267,6 +266,8 @@ export class FeedbackForm extends Component {
                                     handleSubmit={this.handleSubmit}
                                     handleChange={this.handleChange}
                                     values={values}
+                                    valid={this.state.formValid}
+                                    errors={this.state.formErrors}
                                 />
                             );
                         default:
