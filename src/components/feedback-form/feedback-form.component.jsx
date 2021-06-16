@@ -9,274 +9,301 @@ import FormStep4 from '../form-step4/form-step4.component';
 import FormStep5 from '../form-step5/form-step5.component';
 
 export class FeedbackForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            step: 1,
-            redirect: false,
-            firstName: '',
-            lastName: '',
-            companyName: '',
-            relationshipFeedback: '',
-            recommend: 'yes',
-            whyRecommend: '',
-            testimonial: '',
-            services: {},
-            formErrors: { firstName: '', lastName: '', companyName: '', relationshipFeedback: '', recommend: '', whyRecommend: '', testimonial: '', services: {} },
-            firstNameValid: false,
-            lastNameValid: false,
-            companyNameValid: false,
-            relationshipFeedbackValid: false,
-            // recommendValid: false,
-            whyRecommendValid: false,
-            testimonialValid: false,
-            // servicesValid: false,
-            formValid: false,
-            copied: false,
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      step: 1,
+      redirect: false,
+      firstName: '',
+      lastName: '',
+      companyName: '',
+      relationshipFeedback: '',
+      recommend: 'yes',
+      whyRecommend: '',
+      testimonial: '',
+      services: {},
+      otherService: '',
+      formErrors: {
+        firstName: '',
+        lastName: '',
+        companyName: '',
+        relationshipFeedback: '',
+        recommend: '',
+        whyRecommend: '',
+        testimonial: '',
+        services: {},
+      },
+      firstNameValid: false,
+      lastNameValid: false,
+      companyNameValid: false,
+      relationshipFeedbackValid: false,
+      // recommendValid: false,
+      whyRecommendValid: false,
+      testimonialValid: false,
+      // servicesValid: false,
+      formValid: false,
+      copied: false,
+    };
+  }
+
+  // Proceed to next step
+  nextStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step + 1,
+    });
+  };
+
+  // Go back to prev step
+  prevStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step - 1,
+    });
+  };
+
+  // Handle fields change
+  handleChange = (input) => (e) => {
+    e.persist();
+    this.setState({ [input]: e.target.value }, () => {
+      this.validateField(input, e.target.value);
+    });
+  };
+
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let firstNameValid = this.state.firstNameValid;
+    let lastNameValid = this.state.lastNameValid;
+    let companyNameValid = this.state.companyNameValid;
+    let relationshipFeedbackValid = this.state.relationshipFeedbackValid;
+    // let recommendValid = this.state.recommendValid;
+    let whyRecommendValid = this.state.whyRecommendValid;
+    let testimonialValid = this.state.testimonialValid;
+    // let servicesValid = this.state.servicesValid;
+
+    switch (fieldName) {
+      case 'firstName':
+        firstNameValid = value.length >= 2;
+        fieldValidationErrors.firstName = firstNameValid
+          ? ''
+          : ' is empty or too short';
+        break;
+      case 'lastName':
+        lastNameValid = value.length >= 2;
+        fieldValidationErrors.lastName = lastNameValid
+          ? ''
+          : ' is empty or too short';
+        break;
+      case 'companyName':
+        companyNameValid = value.length >= 2;
+        fieldValidationErrors.companyName = companyNameValid
+          ? ''
+          : ' is empty or too short';
+        break;
+      case 'relationshipFeedback':
+        relationshipFeedbackValid = value.length >= 2;
+        fieldValidationErrors.relationshipFeedback = relationshipFeedbackValid
+          ? ''
+          : ' is empty or too short';
+        break;
+      // case 'recommend':
+      //     recommendValid = value.length >= 2;
+      //     fieldValidationErrors.recommend = recommendValid ? '' : ' is empty or too short';
+      //     break;
+      case 'whyRecommend':
+        whyRecommendValid = value.length >= 2;
+        fieldValidationErrors.whyRecommend = whyRecommendValid
+          ? ''
+          : ' is empty or too short';
+        break;
+      case 'testimonial':
+        testimonialValid = value.length >= 2;
+        fieldValidationErrors.testimonial = testimonialValid
+          ? ''
+          : ' is empty or too short';
+        break;
+      // case 'services':
+      //     servicesValid = value.length >= 1;
+      //     fieldValidationErrors.services = servicesValid ? '' : ' is empty';
+      //     break;
+      default:
+        break;
     }
+    this.setState(
+      {
+        formErrors: fieldValidationErrors,
+        firstNameValid: firstNameValid,
+        lastNameValid: lastNameValid,
+        companyNameValid: companyNameValid,
+        relationshipFeedbackValid: relationshipFeedbackValid,
+        //recommendValid: recommendValid,
+        whyRecommendValid: whyRecommendValid,
+        testimonialValid: testimonialValid,
+        //servicesValid: servicesValid,
+      },
+      this.validateForm
+    );
+  }
 
-    // Proceed to next step
-    nextStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step + 1
-        })
-    }
+  validateForm() {
+    this.setState({
+      formValid:
+        this.state.firstNameValid &&
+        this.state.lastNameValid &&
+        this.state.companyNameValid &&
+        this.state.relationshipFeedbackValid &&
+        //this.state.recommendValid &&
+        this.state.whyRecommendValid &&
+        this.state.testimonialValid,
+      //this.state.servicesValid,
+    });
+  }
 
-    // Go back to prev step
-    prevStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step - 1
-        })
-    }
+  // Handle checkbox change
+  handleCheckboxChange = (e) => {
+    const { name } = e.target;
+    this.setState((previousState) => {
+      const services = { ...previousState.services };
+      services[name] = !services[name];
+      return { services };
+    });
+  };
 
-    // Handle fields change
-    handleChange = input => e => {
-        e.persist()
-        this.setState({ [input]: e.target.value }, () => {
-            this.validateField(input, e.target.value);
-        });
-    }
+  // Handle submit
+  handleSubmit = (e) => {
+    // const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const url = 'https://usebasin.com/f/455b81f716b8';
 
-    validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let firstNameValid = this.state.firstNameValid;
-        let lastNameValid = this.state.lastNameValid;
-        let companyNameValid = this.state.companyNameValid;
-        let relationshipFeedbackValid = this.state.relationshipFeedbackValid;
-        // let recommendValid = this.state.recommendValid;
-        let whyRecommendValid = this.state.whyRecommendValid;
-        let testimonialValid = this.state.testimonialValid;
-        // let servicesValid = this.state.servicesValid;
-    
-        switch (fieldName) {
-          case 'firstName':
-            firstNameValid = value.length >= 2;
-            fieldValidationErrors.firstName = firstNameValid ? '' : ' is empty or too short';
-            break;
-          case 'lastName':
-            lastNameValid = value.length >= 2;
-            fieldValidationErrors.lastName = lastNameValid ? '' : ' is empty or too short';
-            break;
-          case 'companyName':
-            companyNameValid = value.length >= 2;
-            fieldValidationErrors.companyName = companyNameValid
-              ? ''
-              : ' is empty or too short';
-            break;
-          case 'relationshipFeedback':
-            relationshipFeedbackValid = value.length >= 2;
-            fieldValidationErrors.relationshipFeedback = relationshipFeedbackValid ? '' : ' is empty or too short';
-            break;
-        // case 'recommend':
-        //     recommendValid = value.length >= 2;
-        //     fieldValidationErrors.recommend = recommendValid ? '' : ' is empty or too short';
-        //     break;
-        case 'whyRecommend':
-            whyRecommendValid = value.length >= 2;
-            fieldValidationErrors.whyRecommend = whyRecommendValid ? '' : ' is empty or too short';
-            break;
-        case 'testimonial':
-            testimonialValid = value.length >= 2;
-            fieldValidationErrors.testimonial = testimonialValid ? '' : ' is empty or too short';
-            break;
-        // case 'services':
-        //     servicesValid = value.length >= 1;
-        //     fieldValidationErrors.services = servicesValid ? '' : ' is empty';
-        //     break;
-          default:
-            break;
-        }
-        this.setState(
-          {
-            formErrors: fieldValidationErrors,
-            firstNameValid: firstNameValid,
-            lastNameValid: lastNameValid,
-            companyNameValid: companyNameValid,
-            relationshipFeedbackValid: relationshipFeedbackValid,
-            //recommendValid: recommendValid,
-            whyRecommendValid: whyRecommendValid,
-            testimonialValid: testimonialValid,
-            //servicesValid: servicesValid,
-          },
-          this.validateForm
-        );
-      }
-    
-      validateForm() {
-        this.setState({
-          formValid:
-            this.state.firstNameValid &&
-            this.state.lastNameValid &&
-            this.state.companyNameValid &&
-            this.state.relationshipFeedbackValid &&
-            //this.state.recommendValid &&
-            this.state.whyRecommendValid &&
-            this.state.testimonialValid 
-            //this.state.servicesValid,
-        });
-      }
-    
-      
+    const {
+      firstName,
+      lastName,
+      companyName,
+      relationshipFeedback,
+      recommend,
+      whyRecommend,
+      testimonial,
+      services,
+      otherService,
+    } = this.state;
 
-    // Handle checkbox change
-    handleCheckboxChange = e => {
-        const { name } = e.target;
-        this.setState( previousState => {
-            const services = { ...previousState.services }; 
-            services[name] = !services[name];
-            return { services };
-        });
-    }
+    // Save testimonial to be copied in the next step
+    localStorage.setItem('testimonial', this.state.testimonial);
 
-    // Handle submit 
-    handleSubmit = e => {
-        // const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-        const url = "https://usebasin.com/f/455b81f716b8";
+    const servicesArray = Object.keys(services);
+    const servicesReturn = servicesArray.join(', ');
 
-        const { 
-            firstName,
-            lastName,
-            companyName,
-            relationshipFeedback,
-            recommend,
-            whyRecommend,
-            testimonial,
-            services,
-        } = this.state;
+    let formData = new FormData();
+    formData.append('Subject', 'DR - Clients Feedback');
+    formData.append('Client Info:', '');
+    formData.append('First Name:', firstName);
+    formData.append('Last Name:', lastName);
+    formData.append('Company Name:', companyName);
+    formData.append('What services the client receive:', servicesReturn);
+    formData.append('Other servicers', otherService);
+    formData.append(
+      'What the clients like about their experience with Digital Resource:',
+      relationshipFeedback
+    );
+    formData.append('Would the client recommend DR to a friend?', recommend);
+    formData.append('Why?', whyRecommend);
+    formData.append('Client Testimonial:', testimonial);
 
-        // Save testimonial to be copied in the next step
-        localStorage.setItem('testimonial', this.state.testimonial);
+    let request = new XMLHttpRequest();
+    request.open('POST', url);
+    request.send(formData);
 
-        const servicesArray = Object.keys(services);
-        const servicesReturn = servicesArray.join(", ");
+    this.setState({ redirect: true });
+  };
 
-        let formData = new FormData();
-        formData.append('Subject', 'DR - Clients Feedback');
-        formData.append('Client Info:', '');
-        formData.append('First Name:', firstName);
-        formData.append('Last Name:', lastName);
-        formData.append('Company Name:', companyName);
-        formData.append('What services the client receive:', servicesReturn);
-        formData.append('What the clients like about their experience with Digital Resource:', relationshipFeedback);
-        formData.append('Would the client recommend DR to a friend?', recommend);
-        formData.append('Why?', whyRecommend);
-        formData.append('Client Testimonial:', testimonial);
+  render() {
+    const { step, redirect } = this.state;
+    const {
+      firstName,
+      lastName,
+      companyName,
+      relationshipFeedback,
+      recommend,
+      whyRecommend,
+      testimonial,
+      services,
+      otherService,
+      formErrors,
+      copied,
+    } = this.state;
+    const values = {
+      firstName,
+      lastName,
+      companyName,
+      relationshipFeedback,
+      recommend,
+      whyRecommend,
+      testimonial,
+      services,
+      otherService,
+      formErrors,
+      copied,
+    };
 
-        let request = new XMLHttpRequest();
-        request.open("POST", url);
-        request.send(formData);
-
-        this.setState({ redirect: true });
-    }
-
-
-    render() {
-        const { step, redirect } = this.state;
-        const { 
-                firstName,
-                lastName,
-                companyName,
-                relationshipFeedback,
-                recommend,
-                whyRecommend,
-                testimonial,
-                services,
-                formErrors,
-                copied
-              } = this.state;
-        const values = {
-                        firstName,
-                        lastName,
-                        companyName,
-                        relationshipFeedback,
-                        recommend,
-                        whyRecommend,
-                        testimonial,
-                        services,
-                        formErrors,
-                        copied
-                    };
-
-        return redirect? ( <Redirect to="/success" /> ) : (
-            <div className="container">
-                {(() => {
-                    switch (step) {
-                        case 1:
-                            return (
-                                <FormStep1 
-                                    nextStep={this.nextStep}
-                                    handleChange={this.handleChange}
-                                    values={values}
-                                />
-                            );
-                        case 2:
-                            return (
-                                <FormStep2 
-                                    nextStep={this.nextStep}
-                                    prevStep={this.prevStep}
-                                    handleChange={this.handleCheckboxChange}
-                                    values={values}
-                                />
-                            );
-                        case 3:
-                            return (
-                                <FormStep3 
-                                    nextStep={this.nextStep}
-                                    prevStep={this.prevStep}
-                                    handleChange={this.handleChange}
-                                    values={values}
-                                />
-                            );
-                        case 4:
-                            return (
-                                <FormStep4 
-                                    nextStep={this.nextStep}
-                                    prevStep={this.prevStep}
-                                    handleChange={this.handleChange}
-                                    values={values}
-                                />
-                            );
-                        case 5:
-                            return (
-                                <FormStep5 
-                                    prevStep={this.prevStep}
-                                    handleSubmit={this.handleSubmit}
-                                    handleChange={this.handleChange}
-                                    values={values}
-                                    valid={this.state.formValid}
-                                    errors={this.state.formErrors}
-                                />
-                            );
-                        default:
-                            (console.log('This is a multi-step form built with React.'))
-                    }
-                })()}
-            </div>
-        )
-    }
+    return redirect ? (
+      <Redirect to="/success" />
+    ) : (
+      <div className="container">
+        {(() => {
+          switch (step) {
+            case 1:
+              return (
+                <FormStep1
+                  nextStep={this.nextStep}
+                  handleChange={this.handleChange}
+                  values={values}
+                />
+              );
+            case 2:
+              return (
+                <FormStep2
+                  nextStep={this.nextStep}
+                  prevStep={this.prevStep}
+                  handleCheckboxChange={this.handleCheckboxChange}
+                  handleChange={this.handleChange}
+                  values={values}
+                />
+              );
+            case 3:
+              return (
+                <FormStep3
+                  nextStep={this.nextStep}
+                  prevStep={this.prevStep}
+                  handleChange={this.handleChange}
+                  values={values}
+                />
+              );
+            case 4:
+              return (
+                <FormStep4
+                  nextStep={this.nextStep}
+                  prevStep={this.prevStep}
+                  handleChange={this.handleChange}
+                  values={values}
+                />
+              );
+            case 5:
+              return (
+                <FormStep5
+                  prevStep={this.prevStep}
+                  handleSubmit={this.handleSubmit}
+                  handleChange={this.handleChange}
+                  values={values}
+                  valid={this.state.formValid}
+                  errors={this.state.formErrors}
+                />
+              );
+            default:
+              console.log('This is a multi-step form built with React.');
+          }
+        })()}
+      </div>
+    );
+  }
 }
 
 export default FeedbackForm;

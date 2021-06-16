@@ -64,7 +64,7 @@
         box-shadow: 0px 0px 78px #1D1D1D1A;
         background-color: $white;
         background-image: url('../../assets/image-form2.png');
-        background-size: 29.15vw auto;
+        background-size: 32.15vw auto;
         background-repeat: no-repeat;
         background-position: 0% 50%;
         display: flex;
@@ -74,7 +74,7 @@
 
         @media (max-width: $laptop-breakpoint){
             max-width: 75.04vw;
-            background-size: 54.35vw auto;
+            background-size: 50.35vw auto;
             background-position: -60% 50%;
             padding: 3.23vw 4.5vw;
         }
@@ -86,14 +86,14 @@
         }
         @media (max-width: $tablet-breakpoint){
             max-width: 95vw;
-            min-height: 182.08vw;
+            min-height: 222.08vw;
             padding: 6.23vw 7.5vw;
             background-size: 140.35vw auto;
             background-position: 5% 40%;
         }
         @media (max-width: $mobile-breakpoint){
             max-width: 95vw;
-            min-height: 202.08vw;
+            min-height: 212.08vw;
             padding: 2.23vw 2.5vw;
             background-size: 180vw auto;
             background-position: 10% 100%;
@@ -149,7 +149,8 @@
                 align-items: flex-start;
                 border: 1px solid #F2F2F2;
                 border-radius: 15px;
-                padding: 1.87vw;
+                padding: 1.37vw;
+                margin-bottom: 30px;
 
                 @media (max-width: $laptop-breakpoint){
                     max-width: 39vw;
@@ -169,7 +170,7 @@
                 }
 
                 .p {
-                    margin-bottom: 1.56vw;
+                    margin-bottom: 1.04 vw;
                 }
 
                 .checkbox-wrapper {
@@ -188,6 +189,23 @@
                     @media (max-width: $mobile-breakpoint){
                         width: 100%;
                     }
+                }
+                
+            }
+            .form__input_2 {
+                width: 100% !important;
+                height: 3.5vw !important;
+                background-color: $grayLight !important;
+                margin-bottom: 0px !important;
+                border-radius: 5px !important;
+                padding: 15px !important;
+                border: none !important;
+
+                @media (max-width: $laptop-breakpoint){
+                    height: 65px !important;
+                }
+                @media (max-width: $laptop-breakpoint){
+                    margin-bottom: 30px !important;
                 }
             }
 
@@ -231,7 +249,7 @@
                 background-color: #ffffff;
                 border-radius: 30px;
                 padding: 25px;
-                max-height: 195vw;
+                max-height: 215vw;
                 color: $black;
             }
 
@@ -240,11 +258,11 @@
                 background-color: $white;
                 border-radius: 30px;
                 padding: 20px;
-                max-height: 280vw;
+                min-height: 300vw;
                 color: $black;
             }
             @media (max-width: $small-mobile-breakpoint){
-                min-height: 310vw;
+                min-height: 335vw;
             }
         }
     }
